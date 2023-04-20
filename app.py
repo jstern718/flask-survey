@@ -25,19 +25,26 @@ def load_question():
 
     # check our REPONSES list to see if empty
         # if its empty go to question 0
-    # else 
-        # get last index add one to it to access next question 
+    # else
+        # get last index add one to it to access next question
 
     # if RESPONSES
 
     return(redirect('/begin'))
 
-@app.get("/begin")
+@app.post("/begin")
 def get_question_route():
-    
 
+    return redirect("/questions/0")
 
-    return render_template("question.html")
+@app.get("/questions/0")
+def get_question_route2():
+
+    question = survey.questions[0].prompt
+    choices = survey.questions[0].choices
+
+    return render_template("question.html", question = question, choices = choices)
+
 
 
 
