@@ -15,10 +15,31 @@ RESPONSES = []
 def homepage():
     """Return homepage."""
 
-    survey_title = survey.title
-    print("print title:", survey_title)
+    title = survey.title
+    instructions = survey.instructions
 
-    return render_template("survey_start.html")
+    return render_template("survey_start.html", title = title, instructions = instructions)
+
+@app.post("/")
+def load_question():
+
+    # check our REPONSES list to see if empty
+        # if its empty go to question 0
+    # else 
+        # get last index add one to it to access next question 
+
+    # if RESPONSES
+
+    return(redirect('/begin'))
+
+@app.get("/begin")
+def get_question_route():
+    
+
+
+    return render_template("question.html")
+
+
 
 
 
