@@ -34,7 +34,7 @@ satisfaction_survey = Survey(
     "Please fill out a survey about your experience with us.",
     [
         Question("Have you shopped here before?"),
-        Question("Did someone else shop with you today?"),
+        Question("Did someone else shop with you todays?"),
         Question(
             "On average, how much do you spend a month on frisbees?",
             ["Less than $10,000", "$10,000 or more"]),
