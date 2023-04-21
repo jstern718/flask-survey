@@ -20,14 +20,14 @@ def homepage():
 
     return render_template("survey_start.html", title = title, instructions = instructions)
 
-@app.post("/")
-def load_homepage():
+# @app.post("/")
+# def load_homepage():
 
-    return(redirect('/begin'))
+#     return(redirect('/begin'))
 
 @app.post("/begin")
 def start_survey():
-    
+
     print("responses length before submitting answer ===>", len(RESPONSES))
     return redirect(f"/questions/{len(RESPONSES)}")
 
@@ -46,12 +46,17 @@ def store_answer():
     RESPONSES.append(answer)
     print("responses length after submitting answer ===>", len(RESPONSES))
 
-    return redirect(f"/questions/{len(RESPONSES)}")
+    if len(RESPONSES) < len(survey.questions):
+        return redirect(f"/questions/{len(RESPONSES)}")
+    else:
+        return redirect("/completion")
 
 
+@app.get("/completion")
+def get_thanks():
 
-
-
+    # prompts_and_responses = {}
+    return render_template("completion.html", responses = RESPONSES, questions = survey.questions)
 
 
 
