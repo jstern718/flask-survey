@@ -21,29 +21,37 @@ def homepage():
     return render_template("survey_start.html", title = title, instructions = instructions)
 
 @app.post("/")
-def load_question():
-
-    # check our REPONSES list to see if empty
-        # if its empty go to question 0
-    # else
-        # get last index add one to it to access next question
-
-    # if RESPONSES
+def load_homepage():
 
     return(redirect('/begin'))
 
 @app.post("/begin")
-def get_question_route():
+def start_survey():
+    
+    print("responses length before submitting answer ===>", len(RESPONSES))
+    return redirect(f"/questions/{len(RESPONSES)}")
 
-    return redirect("/questions/0")
+@app.get(f"/questions/<number>")
+def get_question(number):
 
-@app.get("/questions/0")
-def get_question_route2():
-
-    question = survey.questions[0].prompt
-    choices = survey.questions[0].choices
+    question = survey.questions[len(RESPONSES)].prompt
+    choices = survey.questions[len(RESPONSES)].choices
 
     return render_template("question.html", question = question, choices = choices)
+
+@app.post("/answer")
+def store_answer():
+
+    answer = request.form["answer"]
+    RESPONSES.append(answer)
+    print("responses length after submitting answer ===>", len(RESPONSES))
+
+    return redirect(f"/questions/{len(RESPONSES)}")
+
+
+
+
+
 
 
 
